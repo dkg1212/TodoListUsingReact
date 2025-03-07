@@ -18,17 +18,20 @@ const child = {
   },
 };
 
+// Priority color mapping
+const priorityColors = {
+  high: styles.highPriority,
+  medium: styles.mediumPriority,
+  low: styles.lowPriority,
+};
+
 function TodoItem({ todo }) {
   const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
 
   useEffect(() => {
-    if (todo.status === 'complete') {
-      setChecked(true);
-    } else {
-      setChecked(false);
-    }
+    setChecked(todo.status === 'complete');
   }, [todo.status]);
 
   const handleCheck = () => {
@@ -47,53 +50,64 @@ function TodoItem({ todo }) {
     setUpdateModalOpen(true);
   };
 
+  // Ensure priority has a default value
+  const priority = todo.priority || 'medium';
+
   return (
-    <>
-      <motion.div className={styles.item} variants={child}>
-        <div className={styles.todoDetails}>
-          <CheckButton checked={checked} handleCheck={handleCheck} />
-          <div className={styles.texts}>
-            <p
-              className={getClasses([
-                styles.todoText,
-                todo.status === 'complete' && styles['todoText--completed'],
-              ])}
-            >
-              {todo.title}
-            </p>
-            <p className={styles.time}>
-              {format(new Date(todo.time), 'p, MM/dd/yyyy')}
-            </p>
-          </div>
-        </div>
-        <div className={styles.todoActions}>
-          <div
-            className={styles.icon}
-            onClick={() => handleDelete()}
-            onKeyDown={() => handleDelete()}
-            tabIndex={0}
-            role="button"
+    <motion.div
+      className={styles.item}
+      variants={child}
+      whileHover={{ scale: 1.05 }}
+      transition={{ duration: 0.2 }}
+    >
+      <div className={styles.todoDetails}>
+        <CheckButton checked={checked} handleCheck={handleCheck} />
+        <div className={styles.texts}>
+          <p
+            className={getClasses([
+              styles.todoText,
+              todo.status === 'complete' && styles['todoText--completed'],
+            ])}
           >
-            <MdDelete />
-          </div>
-          <div
-            className={styles.icon}
-            onClick={() => handleUpdate()}
-            onKeyDown={() => handleUpdate()}
-            tabIndex={0}
-            role="button"
-          >
-            <MdEdit />
-          </div>
+            {todo.title}
+          </p>
+          <p className={styles.time}>
+            {format(new Date(todo.time), 'p, MM/dd/yyyy')}
+          </p>
         </div>
-      </motion.div>
+      </div>
+      <p
+        className={getClasses([styles.priorityLabel, priorityColors[priority]])}
+      >
+        {priority.toUpperCase()} Priority
+      </p>
+      <div className={styles.todoActions}>
+        <div
+          className={styles.icon}
+          onClick={handleDelete}
+          onKeyDown={handleDelete}
+          tabIndex={0}
+          role="button"
+        >
+          <MdDelete />
+        </div>
+        <div
+          className={styles.icon}
+          onClick={handleUpdate}
+          onKeyDown={handleUpdate}
+          tabIndex={0}
+          role="button"
+        >
+          <MdEdit />
+        </div>
+      </div>
       <TodoModal
         type="update"
         modalOpen={updateModalOpen}
         setModalOpen={setUpdateModalOpen}
         todo={todo}
       />
-    </>
+    </motion.div>
   );
 }
 

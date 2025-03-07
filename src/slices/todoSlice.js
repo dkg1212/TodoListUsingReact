@@ -1,78 +1,75 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const getInitialTodo = () => {
-  // getting todo list
-  const localTodoList = window.localStorage.getItem('todoList');
-  // if todo list is not empty
-  if (localTodoList) {
-    return JSON.parse(localTodoList);
+  const authUser = JSON.parse(localStorage.getItem('authUser'));
+  if (!authUser || !authUser.isAuthenticated) {
+    return []; // If no user is logged in, return an empty task list
   }
-  window.localStorage.setItem('todoList', []);
-  return [];
-};
-
-const initialValue = {
-  filterStatus: 'all',
-  todoList: getInitialTodo(),
+  return (
+    JSON.parse(localStorage.getItem(`todoList_${authUser.username}`)) || []
+  );
 };
 
 export const todoSlice = createSlice({
   name: 'todo',
-  initialState: initialValue,
+  initialState: {
+    filterStatus: 'all',
+    todoList: getInitialTodo(),
+  },
   reducers: {
     addTodo: (state, action) => {
+      const authUser = JSON.parse(localStorage.getItem('authUser'));
+      if (!authUser) return;
+
       state.todoList.push(action.payload);
-      const todoList = window.localStorage.getItem('todoList');
-      if (todoList) {
-        const todoListArr = JSON.parse(todoList);
-        todoListArr.push({
-          ...action.payload,
-        });
-        window.localStorage.setItem('todoList', JSON.stringify(todoListArr));
-      } else {
-        window.localStorage.setItem(
-          'todoList',
-          JSON.stringify([
-            {
-              ...action.payload,
-            },
-          ])
-        );
-      }
+      localStorage.setItem(
+        `todoList_${authUser.username}`,
+        JSON.stringify(state.todoList)
+      );
     },
     updateTodo: (state, action) => {
-      const todoList = window.localStorage.getItem('todoList');
-      if (todoList) {
-        const todoListArr = JSON.parse(todoList);
-        todoListArr.forEach((todo) => {
-          if (todo.id === action.payload.id) {
-            todo.status = action.payload.status;
-            todo.title = action.payload.title;
-          }
-        });
-        window.localStorage.setItem('todoList', JSON.stringify(todoListArr));
-        state.todoList = [...todoListArr];
-      }
+      const authUser = JSON.parse(localStorage.getItem('authUser'));
+      if (!authUser) return;
+
+      state.todoList = state.todoList.map((todo) =>
+        todo.id === action.payload.id ? { ...todo, ...action.payload } : todo
+      );
+      localStorage.setItem(
+        `todoList_${authUser.username}`,
+        JSON.stringify(state.todoList)
+      );
     },
     deleteTodo: (state, action) => {
-      const todoList = window.localStorage.getItem('todoList');
-      if (todoList) {
-        const todoListArr = JSON.parse(todoList);
-        todoListArr.forEach((todo, index) => {
-          if (todo.id === action.payload) {
-            todoListArr.splice(index, 1);
-          }
-        });
-        window.localStorage.setItem('todoList', JSON.stringify(todoListArr));
-        state.todoList = todoListArr;
-      }
+      const authUser = JSON.parse(localStorage.getItem('authUser'));
+      if (!authUser) return;
+
+      state.todoList = state.todoList.filter(
+        (todo) => todo.id !== action.payload
+      );
+      localStorage.setItem(
+        `todoList_${authUser.username}`,
+        JSON.stringify(state.todoList)
+      );
     },
     updateFilterStatus: (state, action) => {
       state.filterStatus = action.payload;
     },
+    loadUserTodos: (state) => {
+      const authUser = JSON.parse(localStorage.getItem('authUser'));
+      if (authUser) {
+        state.todoList =
+          JSON.parse(localStorage.getItem(`todoList_${authUser.username}`)) ||
+          [];
+      }
+    },
   },
 });
 
-export const { addTodo, updateTodo, deleteTodo, updateFilterStatus } =
-  todoSlice.actions;
+export const {
+  addTodo,
+  updateTodo,
+  deleteTodo,
+  updateFilterStatus,
+  loadUserTodos,
+} = todoSlice.actions;
 export default todoSlice.reducer;
