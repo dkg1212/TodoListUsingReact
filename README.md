@@ -1,11 +1,12 @@
 ![React Todo App](./banner0.png)
+
 ![React Todo App](./banner1.png)
 
 # React Todo App.
 
 A complete todo application with all features.
 
-**live demo: [https://wc-react-todo-app.netlify.app/](https://wc-react-todo-app.netlify.app/)**
+**live demo: [https://todo-list-using-react-phi-beige.vercel.app/](https://todo-list-using-react-phi-beige.vercel.app/)**
 
 ---
 
