@@ -33,6 +33,12 @@ function TodoModal({ type, modalOpen, setModalOpen, todo }) {
     }
   }, [type, todo, modalOpen]);
 
+  useEffect(() => {
+    if (modalOpen) {
+      document.getElementById('title')?.focus();
+    }
+  }, [modalOpen]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!title.trim()) {
@@ -86,6 +92,7 @@ function TodoModal({ type, modalOpen, setModalOpen, todo }) {
                   value={title}
                   onChange={(e) => setTitle(e.target.value.slice(0, 50))}
                   className={styles.input}
+                  autoComplete="off"
                 />
               </label>
 
@@ -105,33 +112,18 @@ function TodoModal({ type, modalOpen, setModalOpen, todo }) {
               <label htmlFor="priority">
                 Priority
                 <div className={styles.priorityWrapper}>
-                  <button
-                    type="button"
-                    className={`${styles.priorityButton} ${
-                      priority === 'high' ? styles.high : ''
-                    }`}
-                    onClick={() => setPriority('high')}
-                  >
-                    High
-                  </button>
-                  <button
-                    type="button"
-                    className={`${styles.priorityButton} ${
-                      priority === 'medium' ? styles.medium : ''
-                    }`}
-                    onClick={() => setPriority('medium')}
-                  >
-                    Medium
-                  </button>
-                  <button
-                    type="button"
-                    className={`${styles.priorityButton} ${
-                      priority === 'low' ? styles.low : ''
-                    }`}
-                    onClick={() => setPriority('low')}
-                  >
-                    Low
-                  </button>
+                  {['high', 'medium', 'low'].map((level) => (
+                    <button
+                      key={level}
+                      type="button"
+                      className={`${styles.priorityButton} ${
+                        priority === level ? styles.selectedPriority : ''
+                      }`}
+                      onClick={() => setPriority(() => level)} // ✅ Ensures state updates properly
+                    >
+                      {level.charAt(0).toUpperCase() + level.slice(1)}
+                    </button>
+                  ))}
                 </div>
               </label>
 
