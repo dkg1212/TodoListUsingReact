@@ -10,22 +10,60 @@
 	text-transform: capitalize;
 	cursor: pointer;
 	overflow: hidden;
-	&__select {
-		color: var(--black-2);
-		font-family: Poppins;
-		padding: 1rem;
-		border: none;
-		background-color: var(--bg-3);
+	transition: background 0.3s ease, transform 0.2s ease-in-out;
 
-		width: 150px;
-		cursor: pointer;
+	&:hover {
+		opacity: 0.9;
+		transform: scale(1.02);
+	}
+
+	&:active {
+		transform: scale(0.98);
+	}
+
+	@media (max-width: 768px) {
+		width: 100%;
+		font-size: 1.4rem;
+		padding: 1rem;
 	}
 }
+
 .button--primary {
 	background-color: var(--primaryPurple);
 	color: var(--white);
+
+	&:hover {
+		background-color: rgba(128, 0, 128, 0.8); // ✅ Using rgba instead of darken()
+	}
 }
+
 .button--secondary {
 	background-color: var(--bg-3);
 	color: var(--black-1);
+
+	&:hover {
+		background-color: rgba(200, 200, 200, 0.8); // ✅ Using rgba instead of lighten()
+	}
+}
+
+.button__select {
+	color: var(--black-2);
+	font-family: Poppins, sans-serif;
+	padding: 1rem;
+	border: none;
+	background-color: var(--bg-3);
+	width: 150px;
+	cursor: pointer;
+	border-radius: 6px;
+	transition: background 0.3s ease;
+
+	&:hover {
+		background-color: rgba(200, 200, 200, 0.8);
+	}
+
+	@media (max-width: 768px) {
+		width: 100%;
+		font-size: 1.4rem;
+		padding: 1rem;
+	}
 }

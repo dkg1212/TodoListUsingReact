@@ -4,6 +4,12 @@
 	max-width: 750px;
 	width: 100%;
 	margin: 0 auto;
+
+	padding: 2rem;
+
+	@include smallDeviceSize {
+		padding: 1.5rem;
+	}
 }
 
 .appHeader {
@@ -11,6 +17,7 @@
 	align-items: center;
 	justify-content: space-between;
 	height: 60px;
+	flex-wrap: wrap;
 }
 
 .content__wrapper {
@@ -19,6 +26,7 @@
 	border-radius: 12px;
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 	transition: all 0.3s ease-in-out;
+	overflow: hidden;
 
 	@include smallDeviceSize {
 		padding: 1.5rem;
@@ -65,5 +73,24 @@
 	}
 	to {
 		opacity: 1;
+	}
+}
+
+@media (max-width: 1024px) {
+	.app__wrapper {
+		max-width: 90%;
+		padding: 1.5rem;
+	}
+}
+
+@media (max-width: 768px) {
+	.appHeader {
+		flex-direction: column;
+		align-items: center;
+		gap: 10px;
+	}
+
+	.content__wrapper {
+		padding: 1.2rem;
 	}
 }
