@@ -2,7 +2,7 @@
 
 
 
-![React Todo App](./banner1.png)
+![React Todo App](./banner2.png)
 
 # React Todo App.
 
