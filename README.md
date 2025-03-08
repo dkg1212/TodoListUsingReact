@@ -1,5 +1,7 @@
 ![React Todo App](./banner0.png)
 
+
+
 ![React Todo App](./banner1.png)
 
 # React Todo App.
@@ -16,7 +18,18 @@ A complete todo application with all features.
 
 ## Project Description
 
-In the project, we will be creating a Complete Todo Application with all features. We will do all the CRUD operations. We will use `React.js` and to manage our states, we will use `Redux`. Also we will learn to make simple animations using `Framer Motion`. This will be a complete `beginner` friendly app. Hope you enjoy it.
+This project is a complete Todo application built using React.js with Redux for state management and Framer Motion for smooth animations. It covers all CRUD (Create, Read, Update, Delete,login) operations, allowing users to add, update, and remove tasks seamlessly.
+
+The application is designed to be beginner-friendly, making it an excellent learning experience for those new to React and Redux. Along the way, i will also explore simple animations to enhance the user experience.
+
+Key Features:
+✅ React.js for building an interactive UI
+✅ Redux for efficient state management
+✅ Framer Motion for adding smooth animations
+✅ Complete CRUD functionality
+✅ Beginner-friendly approach with step-by-step implementation
+
+This project will help strengthen React and Redux fundamentals while introducing exciting UI animations. Let’s build something awesome together! 🚀
 
 ## What i going to learn/use
 
