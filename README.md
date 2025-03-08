@@ -22,7 +22,7 @@ This project is a complete Todo application built using React.js with Redux for 
 
 The application is designed to be beginner-friendly, making it an excellent learning experience for those new to React and Redux. Along the way, i will also explore simple animations to enhance the user experience.
 
-###### Key Features:
+#### Key Features:
 - ✅ React.js for building an interactive UI
 - ✅ Redux for efficient state management
 - ✅ Framer Motion for adding smooth animations
