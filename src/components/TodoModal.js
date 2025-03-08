@@ -109,25 +109,17 @@ function TodoModal({ type, modalOpen, setModalOpen, todo }) {
                 </select>
               </label>
 
-              <label htmlFor="priority">
-                Priority
-                <div className={styles.priorityWrapper}>
-                  {['high', 'medium', 'low'].map((level) => (
-                    <button
-                      key={level}
-                      type="button"
-                      className={`${styles.priorityButton} ${
-                        priority === level ? styles.selectedPriority : ''
-                      }`}
-                      onClick={() => setPriority(level)}
-                      onTouchStart={() => setPriority(level)} // ✅ Ensures it works on mobile
-                      aria-pressed={priority === level} // ✅ Improves accessibility
-                    >
-                      {level.charAt(0).toUpperCase() + level.slice(1)}
-                    </button>
-                  ))}
-                </div>
-              </label>
+              <label htmlFor="todoPriority">Priority</label>
+              <select
+                id="todoPriority"
+                value={priority}
+                onChange={(e) => setPriority(e.target.value)}
+                className={styles.select}
+              >
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
 
               <div className={styles.buttonContainer}>
                 <Button type="submit" variant="primary">
