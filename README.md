@@ -6,7 +6,7 @@
 
 A complete todo application with all features.
 
-**live demo: [https://todo-list-using-react-phi-beige.vercel.app/](https://todo-list-using-react-phi-beige.vercel.app/)**
+**live demo: [https://todo-list-using-react-ifn5.vercel.app/](https://todo-list-using-react-ifn5.vercel.app/)**
 
 ---
 
