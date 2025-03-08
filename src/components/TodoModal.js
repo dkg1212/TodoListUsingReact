@@ -119,7 +119,9 @@ function TodoModal({ type, modalOpen, setModalOpen, todo }) {
                       className={`${styles.priorityButton} ${
                         priority === level ? styles.selectedPriority : ''
                       }`}
-                      onClick={() => setPriority(() => level)} // ✅ Ensures state updates properly
+                      onClick={() => setPriority(level)}
+                      onTouchStart={() => setPriority(level)} // ✅ Ensures it works on mobile
+                      aria-pressed={priority === level} // ✅ Improves accessibility
                     >
                       {level.charAt(0).toUpperCase() + level.slice(1)}
                     </button>

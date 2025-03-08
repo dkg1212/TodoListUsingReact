@@ -50,15 +50,27 @@
   .priorityWrapper {
 	display: flex;
 	gap: 10px;
+	flex-wrap: wrap;
   }
   
   .priorityButton {
-	flex: 1;
-	padding: 8px;
+	flex: 1; // ✅ Ensures equal width for buttons
+	padding: 10px;
+	font-size: 1rem;
+	border-radius: 6px;
 	border: none;
-	border-radius: 5px;
 	cursor: pointer;
-	transition: 0.2s;
+	transition: 0.2s ease-in-out;
+	background: rgb(242, 233, 233);
+	color: rgb(30, 29, 29);
+  
+	&:hover {
+	  transform: scale(1.05);
+	}
+  
+	&:active {
+	  transform: scale(0.95);
+	}
   }
   
   .priorityButton.high {
@@ -74,6 +86,7 @@
   .priorityButton.low {
 	background: green;
 	color: white;
+	
   }
   
   .priorityButton:hover {
@@ -86,7 +99,7 @@
 	margin-top: 1rem;
   }
   .selectedPriority {
-	background-color: var(--primaryPurple);
+	background-color: rgb(233, 14, 14);
 	color: white;
 	transform: scale(1.05);
 	font-weight: bold;
